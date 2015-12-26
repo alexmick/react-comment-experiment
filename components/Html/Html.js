@@ -5,7 +5,6 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import GoogleAnalytics from '../GoogleAnalytics';
 import { title, description } from '../../config';
 
 class Html extends Component {
@@ -32,7 +31,6 @@ class Html extends Component {
       </head>
       <body>
         <div id="app" dangerouslySetInnerHTML={{__html: this.props.body}} />
-        <GoogleAnalytics />
       </body>
       </html>
     );
