@@ -5,14 +5,14 @@
  */
 
 import React, { Component } from 'react';
+import Lorem from '../components/Lorem';
 
 export default class extends Component {
 
   render() {
     return (
       <div>
-        <h1>Home Page</h1>
-        <p>Coming soon.</p>
+        <Lorem />
       </div>
     );
   }
