@@ -16,7 +16,7 @@ class Comment extends Component {
 
   render() {
     return (
-      <li className="comment">
+      <li className="Comment">
         <h2 className="commentAuthor">
           {this.props.author}
         </h2>

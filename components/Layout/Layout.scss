@@ -35,16 +35,3 @@ html, body {
     width: calc($screen-lg-min - 30px);
   }
 }
-
-.document {
-  box-sizing: border-box;
-  float: left;
-  width: 80%;
-  background-color: $document-bg;
-  padding: 30px;
-}
-
-.comments {
-  float: left;
-  width: 20%;
-}

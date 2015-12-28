@@ -6,7 +6,6 @@
 
 import React, { Component, PropTypes } from 'react';
 import './Layout.scss';
-import CommentColumn from '../CommentColumn';
 
 class Layout extends Component {
 
@@ -17,9 +16,7 @@ class Layout extends Component {
   render() {
     return (
       <div className="Layout" >
-        <h1>My document</h1>
-        <div className="document">{this.props.children}</div>
-        <div className="comments"><CommentColumn /></div>
+        {this.props.children}
       </div>
     );
   }

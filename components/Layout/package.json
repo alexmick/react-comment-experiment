@@ -1,4 +1,5 @@
 {
   "name": "Layout",
-  "main": "./Layout.js"
+  "main": "./Layout.js",
+  "description": "Defines the global layout for the website, navigation, footer, sidebars, etc."
 }

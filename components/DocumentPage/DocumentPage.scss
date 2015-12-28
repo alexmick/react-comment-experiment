@@ -6,8 +6,14 @@
 
 @import '../variables.scss';
 
-.CommentColumn {
-  float: left;
-  width: 20%;
+.DocumentPage {
   box-sizing: border-box;
+  float: left;
+  width: 80%;
+  background-color: $document-bg;
+  padding: 30px;
+
+  .highlight {
+    background-color: yellow;
+  }
 }
