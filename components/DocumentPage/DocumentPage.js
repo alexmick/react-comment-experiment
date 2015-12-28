@@ -19,17 +19,16 @@ class DocumentPage extends Component {
 
   selectedText() {
     const selection = rangy.getSelection();
+    const selectionId = Math.floor((1 + Math.random()) * 0x10000);
     // Check there is effectively a text selection, not just a cursor being placed
     if (!selection.isCollapsed) {
-      const selectionId = Math.floor((1 + Math.random()) * 0x10000);
       const applier = rangyClassApplier.createClassApplier('highlight', {
         elementAttributes: {id: selectionId},
       });
-      applier.toggleSelection();
-
-      // Fire callback to trigger adding of a comment
-      this.props.textSelectCallback(selectionId, selection.toString());
+      applier.applyToSelection();
     }
+    // Fire callback to trigger adding of a comment or clearing of the form
+    this.props.textSelectCallback(selectionId);
   }
 
   render() {

@@ -10,17 +10,13 @@ import './Comment.scss';
 class Comment extends Component {
 
   static propTypes = {
-    author: PropTypes.string.isRequired,
     children: PropTypes.string.isRequired,
   };
 
   render() {
     return (
       <li className="Comment">
-        <h2 className="commentAuthor">
-          {this.props.author}
-        </h2>
-        {this.props.children}
+        <p>{this.props.children}</p>
       </li>
     );
   }

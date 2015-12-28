@@ -1,0 +1,42 @@
+/**
+ * React Static Boilerplate
+ * https://github.com/koistya/react-static-boilerplate
+ * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
+ */
+
+@import '../variables.scss';
+
+.CommentForm {
+  margin-left: 0;
+  margin-right: 20px;
+
+  input {
+    font-size: 14px;
+    width: 100%;
+    border: none;
+    border-bottom: solid $body-bg 1px;
+
+    &:focus {
+      outline: none;;
+      border-bottom-color: $brand-color;
+    }
+  }
+
+  button {
+    margin-top: 5px;
+    float: right;
+    color: white;
+    text-transform: uppercase;
+    background-color: $brand-color;
+    border: none;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .clearfix {
+    clear: both;
+  }
+}

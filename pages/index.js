@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from 'react';
+import rangyClassApplier from 'rangy/lib/rangy-classapplier';
 
 import DocumentPage from '../components/DocumentPage';
 import Lorem from '../components/Lorem';
@@ -14,15 +15,34 @@ class Index extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {comments: [
-      {id: 1, author: 'First comment', text: 'This is not right'},
-      {id: 2, author: 'Second comment', text: 'That\'s better'},
-    ]};
+    this.state = {comments: []};
   }
 
-  selectedText(selectionId, selectionText) {
+  selectedText(selectionId) {
     const newState = this.state;
-    newState.comments.push({id: selectionId, author: 'me', text: selectionText});
+
+    // Clear the previous selection if no comment was made
+    newState.comments = newState.comments.filter((comment) => {
+      if (!comment.text) {
+        rangyClassApplier.createClassApplier('highlight').undoToRange(comment.range);
+        return false;
+      }
+      return true;
+    });
+
+    const selection = rangyClassApplier.getSelection();
+    if (!selection.isCollapsed) {
+      // Prepare a new empty comment that will act as the form
+      newState.comments.push({id: selectionId, text: '', range: selection.getRangeAt(0)});
+    }
+
+    // Sort the comments so that the comment form ends in the right place relative to other comments
+    newState.comments.sort((comment1, comment2) => {
+      const rect1 = document.getElementById(comment1.id).getBoundingClientRect();
+      const rect2 = document.getElementById(comment2.id).getBoundingClientRect();
+      return (rect1.top !== rect2.top) ? rect1.top - rect2.top : rect1.left - rect2.left;
+    });
+    // TODO Position the comments relative to the span they represent
 
     this.setState(newState);
   }
@@ -34,7 +54,7 @@ class Index extends Component {
         <DocumentPage textSelectCallback={this.selectedText.bind(this)}>
           <Lorem/>
         </DocumentPage>
-        <CommentColumn comments={this.state.comments}/>
+        <CommentColumn comments={this.state.comments} />
       </div>
     );
   }

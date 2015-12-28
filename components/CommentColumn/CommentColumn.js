@@ -6,20 +6,33 @@
 
 import React, { Component, PropTypes } from 'react';
 import Comment from '../Comment';
+import CommentForm from '../CommentForm';
 import './CommentColumn.scss';
 
 class CommentColumn extends Component {
 
   static propTypes = {
     comments: PropTypes.array.isRequired,
+    commentForm: PropTypes.object,
   };
 
   render() {
     const commentNodes = this.props.comments.map((comment) => {
+      if (comment.text) {
+        return (
+          <Comment key={comment.id}>
+            {comment.text}
+          </Comment>
+        );
+      }
+
+      const handleSubmit = (text) => {
+        comment.text = text;
+        this.forceUpdate();
+      };
+
       return (
-        <Comment author={comment.author} key={comment.id}>
-          {comment.text}
-        </Comment>
+        <CommentForm id={comment.id} submitListener={handleSubmit}/>
       );
     });
 
