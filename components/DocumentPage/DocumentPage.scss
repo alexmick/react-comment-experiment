@@ -17,5 +17,11 @@
   .highlight {
     background-color: $highlight-color;
     outline: solid $highlight-color 3px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $highlight-color-focused;
+      outline-color: $highlight-color-focused;
+    }
   }
 }
