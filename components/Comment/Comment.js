@@ -10,6 +10,7 @@ import './Comment.scss';
 class Comment extends Component {
 
   static propTypes = {
+    active: PropTypes.bool.isRequired,
     relativePosition: PropTypes.number.isRequired,
     children: PropTypes.string.isRequired,
   };
@@ -21,7 +22,7 @@ class Comment extends Component {
     };
 
     return (
-      <li className="Comment" style={relativePositioning}>
+      <li className={'Comment ' + ((this.props.active) ? 'active' : '')} style={relativePositioning}>
         <p>{this.props.children}</p>
       </li>
     );

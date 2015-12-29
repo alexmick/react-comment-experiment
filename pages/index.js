@@ -36,18 +36,28 @@ class Index extends Component {
       newState.comments.push({
         id: selectionId,
         text: '',
+        active: true,
         range: selection.getRangeAt(0),
         relativePosition: document.getElementById(selectionId).getBoundingClientRect().top - React.findDOMNode(this.documentPage).getBoundingClientRect().top + 60,
       });
+
+
+      // Sort the comments so that the comment form ends in the right place relative to other comments
+      newState.comments.sort((comment1, comment2) => {
+        const rect1 = document.getElementById(comment1.id).getBoundingClientRect();
+        const rect2 = document.getElementById(comment2.id).getBoundingClientRect();
+        return (rect1.top !== rect2.top) ? rect1.top - rect2.top : rect1.left - rect2.left;
+      });
+    } else { // The selection was just a click, mark active the comments it might have intersected with
+      for (const comment of newState.comments) {
+        comment.active = false; // Reset active state of all comments
+        if (comment.range.isValid() && comment.range.intersectsOrTouchesRange(selection.getRangeAt(0))) {
+          comment.active = true; // Mark a comment as active if current cursor is contained in its range
+        }
+      }
     }
 
-    // Sort the comments so that the comment form ends in the right place relative to other comments
-    newState.comments.sort((comment1, comment2) => {
-      const rect1 = document.getElementById(comment1.id).getBoundingClientRect();
-      const rect2 = document.getElementById(comment2.id).getBoundingClientRect();
-      return (rect1.top !== rect2.top) ? rect1.top - rect2.top : rect1.left - rect2.left;
-    });
-
+    // Trigger state refresh
     this.setState(newState);
   }
 

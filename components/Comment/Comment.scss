@@ -9,13 +9,23 @@
 .Comment {
   background-color: $document-bg;
   box-shadow: $shadow-1;
-
-
   padding: 10px;
   margin: 15px 0 15px 20px;
+  font-size: 13px;
+  transition: all 0.3s ease-out;
+
+  &.active {
+    margin-left: 0;
+    box-shadow: $shadow-2;
+    z-index: 5;
+
+    p {
+      font-size: 110%;
+    }
+  }
 
   p {
+    transition: font 0.3s ease-out;
     margin: 0;
-    font-size: 13px;
   }
 }

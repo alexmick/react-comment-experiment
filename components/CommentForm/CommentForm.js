@@ -10,6 +10,7 @@ import './CommentForm.scss';
 class CommentForm extends Component {
 
   static propTypes = {
+    active: PropTypes.bool.isRequired,
     relativePosition: PropTypes.number.isRequired,
     submitListener: PropTypes.func.isRequired,
   };
