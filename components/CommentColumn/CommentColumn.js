@@ -20,7 +20,7 @@ class CommentColumn extends Component {
     const commentNodes = this.props.comments.map((comment) => {
       if (comment.text) {
         return (
-          <Comment key={comment.id}>
+          <Comment relativePosition={comment.relativePosition}>
             {comment.text}
           </Comment>
         );
@@ -32,7 +32,7 @@ class CommentColumn extends Component {
       };
 
       return (
-        <CommentForm id={comment.id} submitListener={handleSubmit}/>
+        <CommentForm relativePosition={comment.relativePosition} submitListener={handleSubmit}/>
       );
     });
 

@@ -33,7 +33,12 @@ class Index extends Component {
     const selection = rangyClassApplier.getSelection();
     if (!selection.isCollapsed) {
       // Prepare a new empty comment that will act as the form
-      newState.comments.push({id: selectionId, text: '', range: selection.getRangeAt(0)});
+      newState.comments.push({
+        id: selectionId,
+        text: '',
+        range: selection.getRangeAt(0),
+        relativePosition: document.getElementById(selectionId).getBoundingClientRect().top - React.findDOMNode(this.documentPage).getBoundingClientRect().top + 60,
+      });
     }
 
     // Sort the comments so that the comment form ends in the right place relative to other comments
@@ -42,7 +47,6 @@ class Index extends Component {
       const rect2 = document.getElementById(comment2.id).getBoundingClientRect();
       return (rect1.top !== rect2.top) ? rect1.top - rect2.top : rect1.left - rect2.left;
     });
-    // TODO Position the comments relative to the span they represent
 
     this.setState(newState);
   }
@@ -51,7 +55,7 @@ class Index extends Component {
     return (
       <div>
         <h1>My document</h1>
-        <DocumentPage textSelectCallback={this.selectedText.bind(this)}>
+        <DocumentPage ref={(ref) => this.documentPage = ref} textSelectCallback={this.selectedText.bind(this)}>
           <Lorem/>
         </DocumentPage>
         <CommentColumn comments={this.state.comments} />

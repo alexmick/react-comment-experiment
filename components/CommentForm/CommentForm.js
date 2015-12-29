@@ -10,7 +10,7 @@ import './CommentForm.scss';
 class CommentForm extends Component {
 
   static propTypes = {
-    id: PropTypes.int,
+    relativePosition: PropTypes.number.isRequired,
     submitListener: PropTypes.func.isRequired,
   };
 
@@ -31,12 +31,17 @@ class CommentForm extends Component {
   }
 
   render() {
+    const relativePositioning = {
+      position: 'absolute',
+      top: this.props.relativePosition,
+    };
+
+
     return (
-      <li className="Comment CommentForm">
+      <li className="Comment CommentForm" style={relativePositioning}>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input type="text" onChange={this.handleTextInput.bind(this)}
                  placeholder="Enter comment here"
-                 name={'commentText-' + this.props.id} id={'commentText-' + this.props.id}
           />
           <br/>
           <button type="submit">Add Comment</button>

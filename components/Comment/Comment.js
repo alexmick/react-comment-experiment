@@ -10,12 +10,18 @@ import './Comment.scss';
 class Comment extends Component {
 
   static propTypes = {
+    relativePosition: PropTypes.number.isRequired,
     children: PropTypes.string.isRequired,
   };
 
   render() {
+    const relativePositioning = {
+      position: 'absolute',
+      top: this.props.relativePosition,
+    };
+
     return (
-      <li className="Comment">
+      <li className="Comment" style={relativePositioning}>
         <p>{this.props.children}</p>
       </li>
     );
